@@ -2,7 +2,6 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 import { Button } from '@/components/ui/button'
 import {
     Form,
@@ -21,47 +20,31 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select'
-
-const formSchema = z.object({
-    title: z
-        .string()
-        .min(2, {
-            message: 'Title must be at least 2 characters.',
-        })
-        .max(50, {
-            message: 'Title must not be longer than 50 characters.',
-        }),
-    content: z
-        .string()
-        .min(10, {
-            message: 'Content must be at least 10 characters.',
-        })
-        .max(50, {
-            message: 'Content must not be longer than 50 characters.',
-        }),
-    topic: z.string({
-        required_error: 'Please select an topic',
-    }),
-})
+import { postSchema, postT } from '@/app/zodSchema'
+import { useMutation } from '@tanstack/react-query'
+import { createPostAction } from '@/app/actions'
+import { toast } from 'sonner'
 
 const PostForm = () => {
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<postT>({
+        resolver: zodResolver(postSchema),
         defaultValues: {
             title: '',
             content: '',
         },
     })
 
-    const onSubmit = (values: z.infer<typeof formSchema>) => {
-        console.log(values)
-    }
+    const { mutateAsync: createPost } = useMutation({
+        mutationFn: createPostAction,
+        onSuccess: () => toast('cool'),
+        onError: () => toast('not cool'),
+    })
 
     return (
         <div className="mx-auto my-12 w-96">
             <Form {...form}>
                 <form
-                    onSubmit={form.handleSubmit(onSubmit)}
+                    onSubmit={form.handleSubmit((data) => createPost(data))}
                     className="space-y-2"
                 >
                     <FormField

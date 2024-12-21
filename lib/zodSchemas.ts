@@ -21,5 +21,3 @@ export const postSchema = z.object({
         required_error: 'Please select an topic',
     }),
 })
-
-export type postT = z.infer<typeof postSchema>

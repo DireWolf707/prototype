@@ -20,10 +20,10 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select'
-import { postSchema, postT } from '@/app/zodSchema'
-import { useMutation } from '@tanstack/react-query'
-import { createPostAction } from '@/app/actions'
-import { toast } from 'sonner'
+import { postSchema } from '@/lib/zodSchemas'
+import { topics } from '@/lib/constants'
+import { postT } from '@/lib/types'
+import { useCreatePost } from '@/lib/hooks/post'
 
 const PostForm = () => {
     const form = useForm<postT>({
@@ -34,11 +34,7 @@ const PostForm = () => {
         },
     })
 
-    const { mutateAsync: createPost } = useMutation({
-        mutationFn: createPostAction,
-        onSuccess: () => toast('cool'),
-        onError: () => toast('not cool'),
-    })
+    const { mutate: createPost } = useCreatePost()
 
     return (
         <div className="mx-auto my-12 w-96">
@@ -94,13 +90,11 @@ const PostForm = () => {
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-                                        {['c++', 'javasript', 'python'].map(
-                                            (val, i) => (
-                                                <SelectItem value={val} key={i}>
-                                                    {val}
-                                                </SelectItem>
-                                            )
-                                        )}
+                                        {topics.map((val, i) => (
+                                            <SelectItem value={val} key={i}>
+                                                {val}
+                                            </SelectItem>
+                                        ))}
                                     </SelectContent>
                                 </Select>
                                 <FormMessage />

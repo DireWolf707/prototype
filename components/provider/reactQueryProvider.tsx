@@ -1,6 +1,5 @@
 'use client'
 
-import { Toaster } from '@/components/ui/sonner'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { PropsWithChildren, useState } from 'react'
@@ -23,7 +22,6 @@ const ReactQueryProvider: React.FC<PropsWithChildren> = ({ children }) => {
     return (
         <QueryClientProvider client={queryClient}>
             {children}
-            <Toaster position="top-right" />
             <ReactQueryDevtools />
         </QueryClientProvider>
     )

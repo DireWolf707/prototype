@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const Navbar = () => {
     return (
-        <div className="flex items-center justify-between rounded-b-lg border-4 bg-neutral-200 p-4">
+        <div className="flex items-center justify-between rounded-b-lg border-4 p-4">
             <Link href="/">Navbar</Link>
 
             <Link href="/create">

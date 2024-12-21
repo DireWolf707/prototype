@@ -7,7 +7,18 @@ import { useState } from 'react'
 import React from 'react'
 
 const ReactQueryProvider = ({ children }: React.PropsWithChildren) => {
-    const [queryClient] = useState(new QueryClient())
+    const [queryClient] = useState(
+        () =>
+            new QueryClient({
+                defaultOptions: {
+                    queries: {
+                        staleTime: Infinity,
+                        retry: false,
+                        retryOnMount: false,
+                    },
+                },
+            })
+    )
 
     return (
         <QueryClientProvider client={queryClient}>

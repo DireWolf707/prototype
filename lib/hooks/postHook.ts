@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { createPostAction, getPostsAction } from '@/lib/actions/post'
+import { createPostAction, getPostsAction } from '@/lib/actions/postAction'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 

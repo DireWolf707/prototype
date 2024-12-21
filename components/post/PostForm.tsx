@@ -23,7 +23,7 @@ import {
 import { postSchema } from '@/lib/zodSchemas'
 import { topics } from '@/lib/constants'
 import { postT } from '@/lib/types'
-import { useCreatePost } from '@/lib/hooks/post'
+import { useCreatePost } from '@/lib/hooks/postHook'
 
 const defaultValues: postT = {
     title: '',

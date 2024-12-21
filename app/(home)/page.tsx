@@ -1,6 +1,6 @@
 'use client'
 
-import { useGetPosts } from '@/lib/hooks/post'
+import { useGetPosts } from '@/lib/hooks/postHook'
 
 export default function Home() {
     const { data: posts, isFetching } = useGetPosts()

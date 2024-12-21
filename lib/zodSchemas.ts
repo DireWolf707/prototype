@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { topics } from './constants'
 
 export const postSchema = z.object({
     title: z
@@ -17,7 +18,5 @@ export const postSchema = z.object({
         .max(50, {
             message: 'Content must not be longer than 50 characters.',
         }),
-    topic: z.string({
-        required_error: 'Please select an topic',
-    }),
+    topic: z.enum(topics),
 })

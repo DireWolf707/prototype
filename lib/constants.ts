@@ -1,1 +1,1 @@
-export const topics = ['c++', 'javasript', 'python']
+export const topics = ['c++', 'javasript', 'python'] as const

@@ -25,13 +25,16 @@ import { topics } from '@/lib/constants'
 import { postT } from '@/lib/types'
 import { useCreatePost } from '@/lib/hooks/post'
 
+const defaultValues: postT = {
+    title: '',
+    content: '',
+    topic: 'c++',
+}
+
 const PostForm = () => {
     const form = useForm<postT>({
         resolver: zodResolver(postSchema),
-        defaultValues: {
-            title: '',
-            content: '',
-        },
+        defaultValues,
     })
 
     const { mutate: createPost } = useCreatePost()
@@ -82,11 +85,11 @@ const PostForm = () => {
                                 <FormLabel>Topic</FormLabel>
                                 <Select
                                     onValueChange={field.onChange}
-                                    defaultValue={field.value}
+                                    value={field.value}
                                 >
                                     <FormControl>
                                         <SelectTrigger>
-                                            <SelectValue placeholder="select" />
+                                            <SelectValue />
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>

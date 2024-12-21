@@ -3,10 +3,10 @@
 import { Toaster } from '@/components/ui/sonner'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { useState } from 'react'
+import { PropsWithChildren, useState } from 'react'
 import React from 'react'
 
-const ReactQueryProvider = ({ children }: React.PropsWithChildren) => {
+const ReactQueryProvider: React.FC<PropsWithChildren> = ({ children }) => {
     const [queryClient] = useState(
         () =>
             new QueryClient({

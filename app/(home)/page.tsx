@@ -1,18 +1,19 @@
 'use client'
 
+import Spinner from '@/components/loading/Spinner'
 import { useGetPosts } from '@/lib/hooks/postHook'
 
 export default function Home() {
     const { data: posts, isFetching } = useGetPosts()
 
-    if (isFetching) return 'loading...'
+    if (isFetching) return <Spinner />
 
     return (
         <div className="flex flex-wrap justify-center gap-4 p-8">
             {posts!.map((post) => (
                 <div
                     key={post.id}
-                    className="min-w-64 space-y-4 rounded-md border-2 p-4"
+                    className="min-w-48 space-y-4 rounded-md border-2 p-4"
                 >
                     <div className="border-b-4 text-lg font-extrabold">
                         {post.title}
